@@ -1,39 +1,23 @@
-import PlayButton from "./components/PlayButton";
 import Counter from "./components/Counter";
-import Video from "./components/Video";
 import videoDB from "./data/data";
 import { useState } from "react";
+import AddVideo from "./components/AddVideo";
+import VideoList from "./components/VideoList";
 
 function App() {
   const [videos, setVideos] = useState(videoDB);
 
+  function addVideos(video) {
+    setVideos([...videos, { ...video, id: videos.length + 1 }]);
+  }
   return (
     <>
       <h1>YouTube Videos</h1>
       <div>
-        <button
-          onClick={() =>
-            setVideos([
-              ...videos,
-              {
-                id: videos.length + 1,
-                title: "Angular JS tutorial",
-                views: "99K",
-                time: "1 Month ago",
-                channel: "BGB",
-                verified: "true",
-              },
-            ])
-          }
-        >
-          Add Videos
-        </button>
+        <AddVideo addVideos={addVideos}></AddVideo>
+        <VideoList videos={videos}></VideoList>
       </div>
-      {videos.map((video) => (
-        <Video key={video.id} title={video.title} views={video.views} time={video.time} channel={video.channel} verified={video.verified} id={video.id}>
-          <PlayButton onPlay={() => console.log("Playing..", video.title)} onPause={() => console.log("Paused..", video.title)}></PlayButton>
-        </Video>
-      ))}
+
       <div style={{ clear: "both" }}></div>
       <Counter></Counter>
     </>
