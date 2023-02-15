@@ -1,11 +1,11 @@
 import Video from "./Video";
 import PlayButton from "./PlayButton";
 
-const VideoList = ({ videos }) => {
+const VideoList = ({ videos, deleteVideo, editVideo }) => {
   return (
     <>
       {videos.map((video) => (
-        <Video key={video.id} title={video.title} views={video.views} time={video.time} channel={video.channel} verified={video.verified} id={video.id}>
+        <Video key={video.id} title={video.title} views={video.views} time={video.time} channel={video.channel} verified={video.verified} id={video.id} deleteVideo={deleteVideo} editVideo={editVideo}>
           <PlayButton onPlay={() => console.log("Playing..", video.title)} onPause={() => console.log("Paused..", video.title)}></PlayButton>
         </Video>
       ))}
