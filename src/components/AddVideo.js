@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useVideoReducer from "../hooks/VideoReducerHooks";
 import "./AddVideo.css";
 
@@ -10,9 +10,9 @@ const initialValue = {
   views: "",
 };
 const AddVideo = ({ editableVideo }) => {
-  const dispatch = useVideoReducer();
-
   const [video, setVideo] = useState(initialValue);
+  const dispatch = useVideoReducer();
+  const inputRef = useRef();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -32,12 +32,20 @@ const AddVideo = ({ editableVideo }) => {
     if (editableVideo) {
       setVideo(editableVideo);
     }
+
+    // inputRef.current.focus();
+    inputRef.current.placeholder = "";
+    "type here".split("").forEach((char, i) => {
+      setTimeout(() => {
+        inputRef.current.placeholder = inputRef.current.placeholder + char;
+      }, 200 * i);
+    });
   }, [editableVideo]);
   return (
     <>
       <form>
-        <input type="text" onChange={handleChange} name="title" value={video.title} />
-        <input type="text" onChange={handleChange} name="views" value={video.views} />
+        <input ref={inputRef} type="text" onChange={handleChange} name="title" value={video.title} placeholder="title" />
+        <input type="text" onChange={handleChange} name="views" value={video.views} placeholder="views" />
         <button onClick={handleSubmit}>{editableVideo ? "Edit" : "Add"} Video</button>
       </form>
       {/* <button

@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const Counter = () => {
   const [number, setNumber] = useState(0);
+  let num = useRef(0);
 
   function handleClick() {
     setNumber((number) => number + 1);
     setNumber((number) => number + 2);
-    setNumber((number) => number + 3);
-    setNumber((number) => number + 4);
-    console.log("num", number);
+
+    num.current++;
+    console.log("num", num.current);
   }
   return (
     <>
-      <h1>Counter {number}</h1>
+      <h1>
+        Counter {number} {num.current}
+      </h1>
       <button onClick={handleClick}>Add</button>
     </>
   );

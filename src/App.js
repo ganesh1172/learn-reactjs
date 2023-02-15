@@ -1,4 +1,4 @@
-// import Counter from "./components/Counter";
+import Counter from "./components/Counter";
 import videoDB from "./data/data";
 import { useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
@@ -44,8 +44,8 @@ function App() {
             <VideoList dispatch={dispatch} editVideo={editVideo}></VideoList>
           </div>
 
-          {/* <div style={{ clear: "both" }}></div>
-        <Counter></Counter> */}
+          <div style={{ clear: "both" }}></div>
+          <Counter></Counter>
         </div>
       </VideosDispatchContext.Provider>
     </VideosContext.Provider>
