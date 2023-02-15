@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useVideoReducer from "../hooks/VideoReducerHooks";
 import "./AddVideo.css";
 
 const initialValue = {
@@ -8,15 +9,17 @@ const initialValue = {
   title: "",
   views: "",
 };
-const AddVideo = ({ addVideos, editableVideo, updateVideo }) => {
+const AddVideo = ({ editableVideo }) => {
+  const dispatch = useVideoReducer();
+
   const [video, setVideo] = useState(initialValue);
 
   function handleSubmit(e) {
     e.preventDefault();
     if (editableVideo) {
-      updateVideo(video);
+      dispatch({ type: "UPDATE", payload: video });
     } else {
-      addVideos(video);
+      dispatch({ type: "ADD", payload: video });
     }
     setVideo(initialValue);
   }

@@ -1,11 +1,13 @@
+import useVideoReducer from "../hooks/VideoReducerHooks";
 import "./Video.css";
 
-function Video({ title, id, channel = "GB", views, time, verified, children, deleteVideo, editVideo }) {
+function Video({ title, id, channel = "GB", views, time, verified, children, editVideo }) {
+  const dispatch = useVideoReducer();
   return (
     <>
       <div className="container">
         <div>
-          <button className="delete" onClick={() => deleteVideo(id)}>
+          <button className="delete" onClick={() => dispatch({ type: "DELETE", payload: id })}>
             🗑️
           </button>
           <button className="edit" onClick={() => editVideo(id)}>
